@@ -1,1 +1,1 @@
-Test Doro
+Test Doro <base href="">
