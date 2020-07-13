@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Chambre{% endblock %}
+
+{% block centre %}
+    <h1>Creer Nouveau Chambre</h1>
+    <div class="col-md-4">
+        {{ include('chambre/_form.html.twig') }}
+    </div>
+    <input type="hidden" name="nbchambre" id="nbchambre" value="{{ nbchambre}}">
+    <a href="{{ path('chambre') }}">Retour Liste</a>
+
+<script>
+    $('#chambre_numero').prop('readonly', true);
+    var nbc=$("#nbchambre").val().padStart(4,'0');
+    nbc=nbc.padStart(5,'-');
+     $('#chambre_numero').val(nbc);
+    $('#chambre_departement').change(function () {
+        var numD=$('#chambre_departement').val().padStart(3,'0');
+        $('#chambre_numero').val(numD+nbc);
+    })
+
+</script>
+{% endblock %}

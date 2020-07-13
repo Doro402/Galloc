@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau departement{% endblock %}
+
+{% block centre %}
+    <h1>Nouveau departement</h1>
+    <div class="col-md-4">
+        {{ include('departement/_form.html.twig') }}
+    </div>
+    <a href="{{ path('departement') }}">Retour Liste</a>
+{% endblock %}

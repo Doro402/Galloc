@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Etudiant !
+{% endblock %}
+
+{% block centre %}
+	<h1>Creer nouveau Etudiant !
+	</h1>
+
+	{# <form action="" method="post" name="form" id="form">
+			<label for="mat_etud">
+				Matricule</label>
+			<input type="hidden" name="nb_etud" id="nb_etud" value="{{ etudiants | length }}">
+			<input type="text" name="mat_etud" id="mat_etud" readonly>
+			<br>
+			<label for="nom_etud">Nom</label>
+			<input type="text" name="nom_etud" id="nom_etud">
+			<br>
+			<label for="prenom_etud">Prénom</label>
+			<input type="text" name="prenom_etud" id="prenom_etud">
+			<br>
+			<label for="email_etud">Email</label>
+			<input type="email" name="email_etud" id="email_etud">
+			<br>
+			<label for="tel_etud">Tel</label>
+			<input type="tel" name="tel_etud" id="tel_etud"  required>
+			
+			<br>
+			<label for="bourse">Vous êtes ?</label>
+			<select name="bourse_etud" id="bourse">
+				<option value="">----Choisir----</option>
+				<option value="boursier">Boursier</option>
+				<option value="n_boursier">Non Boursier</option>
+			</select>
+			<br>
+			<div class="ajout"></div>
+	
+	
+			<button type="submit">Enregistrer</button>
+		</form>
+	
+	
+		<script>
+			function genererNum() {
+				var nb1=parseInt($("#nb_etud").val())+1;
+				var nb=String(nb1);
+				for (let index = nb.length; index < 4 ; index++) {
+						nb="0"+nb;			
+				}
+				return nb;
+			}
+			$("#prenom_etud").keydown(function () {
+			var annee = new Date();
+			var year=annee.getFullYear();
+			var cc = $("#nom_etud").val().substring(0, 2).toUpperCase();
+			var ll = $("#prenom_etud").val().substring($("#prenom_etud").val().length - 2, $("#prenom_etud").val().length).toUpperCase();
+			var valgen=year+cc+ll+genererNum();
+			
+			$("#mat_etud").val(valgen);
+			})
+	
+	
+			$("#bourse").change( function () {
+				var val_bourse=$("#bourse option:selected").val();
+				$(".ajout").text("");
+				if (val_bourse=="n_boursier") {
+	
+					$(".ajout").append(
+						$('<label>',{
+							for:'addr',
+						}).text('Adresse')
+					);
+					$(".ajout").append(
+						$('<input>',{
+							type:'text',
+							name:'addr_etud'
+						})				
+					);
+				}  else if(val_bourse=="boursier") {
+					$(".ajout").append(
+						$('<label>',{
+							for:'m_bourse',
+						}).text('Montant Bourse')
+					);
+	
+					$(".ajout").append(
+						`<select name='m_bourse'>
+							<option value="entier">40000</option>
+							<option value="demi">20000</option>
+						</select>`
+					);
+				}
+	
+			})
+		</script> #}
+	<div class="col-md-4">
+		{{ include('etudiant/_form.html.twig') }}
+	</div>
+	<input type="hidden" name="nb_etud" id="nb_etud" value="{{ nbetudiants}}">
+	<a href="{{ path('etudiant') }}">Retour Liste</a>
+
+
+	<script>
+		$(document).ready( function () {
+			$('label[for=etudiant_adresse], #etudiant_adresse').hide();
+			$('label[for=etudiant_montant_bourse], #etudiant_montant_bourse').hide();
+			$('label[for=etudiant_chambre], #etudiant_chambre').hide();
+			$('label[for=etudiant_loge], #etudiant_loge').hide();
+			$('#etudiant_matricule').prop('readonly', true);
+			
+
+		});
+		function genererNum() {
+				var nb1=parseInt($("#nb_etud").val())+1;
+				var nb=String(nb1);
+				for (let index = nb.length; index < 4 ; index++) {
+						nb="0"+nb;			
+				}
+				return nb;
+			}
+			$("#etudiant_prenom").keydown(function () {
+			var annee = new Date();
+			var year=annee.getFullYear();
+			var cc = $("#etudiant_nom").val().substring(0, 2).toUpperCase();
+			var ll = $("#etudiant_prenom").val().substring($("#etudiant_prenom").val().length - 2, $("#etudiant_prenom").val().length).toUpperCase();
+			var valgen=year+cc+ll+genererNum();
+			
+			$("#etudiant_matricule").val(valgen);
+			})
+
+		$("#etudiant_boursier").change( function () {
+			var val_bourse=$("#etudiant_boursier option:selected").val();
+			
+				if (val_bourse=="0") {
+					$('label[for=etudiant_adresse], #etudiant_adresse').show();
+					$('label[for=etudiant_montant_bourse], #etudiant_montant_bourse').hide();
+					$('label[for=etudiant_chambre], #etudiant_chambre').hide();
+					$('label[for=etudiant_loge], #etudiant_loge').hide();
+				}else if (val_bourse=="1") {
+					$('label[for=etudiant_adresse], #etudiant_adresse').hide();
+					$('label[for=etudiant_montant_bourse], #etudiant_montant_bourse').hide();
+					$('label[for=etudiant_chambre], #etudiant_chambre').hide();
+					$('label[for=etudiant_loge], #etudiant_loge').show();
+					
+				}
+		});
+
+		$("#etudiant_loge").change( function () {
+			var val_bourse=$("#etudiant_loge option:selected").val();
+			
+				if (val_bourse=="0") {
+					$('label[for=etudiant_adresse], #etudiant_adresse').show();
+					$('label[for=etudiant_montant_bourse], #etudiant_montant_bourse').show();
+					$('label[for=etudiant_chambre], #etudiant_chambre').hide();
+				}else if (val_bourse=="1") {
+					$('label[for=etudiant_adresse], #etudiant_adresse').hide();
+					$('label[for=etudiant_montant_bourse], #etudiant_montant_bourse').show();
+					$('label[for=etudiant_chambre], #etudiant_chambre').show();
+					
+					
+				}
+		});
+		
+
+
+	</script>
+{% endblock %}
